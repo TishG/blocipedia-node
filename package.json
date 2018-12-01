@@ -1,0 +1,11 @@
+{
+  "name": "blocipedia-node",
+  "version": "1.0.0",
+  "description": "An application where you can create, collaborate, and share wikis.",
+  "main": "(src/server.js)",
+  "scripts": {
+    "test": "set NODE_ENV=test&& jasmine"
+  },
+  "author": "Tish Griffiths",
+  "license": "ISC"
+}
