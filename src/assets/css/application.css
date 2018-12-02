@@ -15,4 +15,14 @@ body {
     margin-left: 25%;
  }
 
+ #welcome {
+     padding-bottom: 5px;
+    -webkit-box-shadow: 0 4px 6px -6p teal;
+    -moz-box-shadow: 0 4px 6px -6px teal;
+    box-shadow: 0 4px 6px -6px teal;
+ }
+
+ .btn-primary {
+     font-weight: 500;
+ }
 
