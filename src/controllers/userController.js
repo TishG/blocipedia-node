@@ -64,7 +64,7 @@ module.exports = {
     //       } else {
     //           passport.authenticate("local")(req, res, () => {
     //               req.flash("notice", "You've successfully signed in!");
-    //               sgMail.setApiKey('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');
+    //               sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     //               sgMail.send(msg);
     //               res.redirect("/");
     //           })
