@@ -20,6 +20,7 @@ describe("routes : wikis", () => {
             Wiki.create({
               title: "JS Frameworks",
               body: "There is a lot of them",
+              private: this.private,
               userId: this.user.id
             })
             .then((wiki) => {
@@ -80,6 +81,7 @@ describe("routes : wikis", () => {
         (err, res, body) => {
           Wiki.findOne({where: {title: "blink-182 songs"}})
           .then((wiki) => {
+            console.log(wiki);
             expect(res.statusCode).toBe(303);
             expect(wiki.title).toBe("blink-182 songs");
             expect(wiki.body).toBe("What's your favorite blink-182 song?");
