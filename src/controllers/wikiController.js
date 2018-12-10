@@ -1,5 +1,16 @@
+const wikiQueries = require("../db/queries.wikis.js");
+
 module.exports = {
     index(req, res, next){
-      res.send("TODO: list all wikis");
-    }
+        wikiQueries.getAllWikis((err, wikis) => {
+                if(err){
+                  res.redirect(500, "/");
+                } else {
+                res.render("wikis/index", {wikis});
+              }
+            })
+          },
+    new(req, res, next){
+        res.render("wikis/new", {userId: req.params.userId});
+      }
   }
