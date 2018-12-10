@@ -22,6 +22,7 @@ describe("User", () => {
         password: "1234567890"
       })
       .then((user) => {
+        console.log(user.email);
         expect(user.email).toBe("user@example.com");
         expect(user.id).toBe(1);
         done();
@@ -38,7 +39,6 @@ describe("User", () => {
         password: "1234567890"
       })
       .then((user) => {
-
         // The code in this block will not be evaluated since the validation error
         // will skip it. Instead, we'll catch the error in the catch block below
         // and set the expectations there.
