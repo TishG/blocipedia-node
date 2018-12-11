@@ -71,8 +71,6 @@ describe("routes : wikis", () => {
         (err, res, body) => {
           Wiki.findOne({where: {title: "blink-182 songs"}})
           .then((wiki) => {
-            // console.log(wiki);
-            // expect(res.statusCode).toBe(303);
             expect(wiki.title).toBe("blink-182 songs");
             expect(wiki.body).toBe("What's your favorite blink-182 song?");
             expect(wiki.private).toBe(false);
