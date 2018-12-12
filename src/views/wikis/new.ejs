@@ -7,8 +7,9 @@
     <% include ../static/partials/navbar.ejs %>
 
     <main class="container">
+      <%= currentUser.id %> is signed in
       <h1 class="text-info text-center my-3">New Wiki</h1>
-      <form action="/wikis/create" method="post">
+      <form action="/wikis/create" method="POST">
         <div class="form-group text-info" style="font-weight: 500">
           <label for="title">Wiki title</label>
           <input type="text" class="form-control" name="title" aria-describedby="titleHelp" placeholder="Enter Title">
