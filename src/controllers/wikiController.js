@@ -14,16 +14,16 @@ module.exports = {
         res.render("wikis/new");
       },
     create(req, res, next){
+      // console.log(req.body);
+      // console.log(req);
       let newWiki = {
         title: req.body.title,
         body: req.body.body,
         private: req.body.private,
-        userId: req.body.user.id
+        userId: req.user.id
       };
       wikiQueries.addWiki(newWiki, (err, wiki) => {
         if(err){
-          console.log("ERROR - addWiki:");
-          console.log(err);
           res.redirect(500, "/wikis/new");
         } else {
           res.redirect(303, `/wikis/${wiki.id}`);
