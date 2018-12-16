@@ -1,4 +1,7 @@
 /node_modules
 /UsersEtildAppDataRoamingnpm
-sendgrid.env
 .env
+/.vscode
+/.node_modules
+/test
+/UsersEtildAppDataRoamingnpm
