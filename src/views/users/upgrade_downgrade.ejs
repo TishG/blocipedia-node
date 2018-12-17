@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang ="en">
+	<head>
+		<% include ../static/partials/head.ejs %>
+	</head>
+	<body>
+		<% include ../static/partials/navbar.ejs %>
+	<main class="container">
+	<% include ../static/partials/messages.ejs %>
+		<% if(currentUser && currentUser.role == "standard") { %>
+			<section class="container upgrade mt-5">
+			<h1 style="color:goldenrod" class="d-flex justify-content-center mt-3">Become a premium<span style="color:goldenrod" class="fas fa-plus fa-xs align-self-center ml-1 mr-2 d-none d-lg-block"></span> member today!</h1>
+			<span style="color:goldenrod" class="mt-2 fas fa-plus fa-lg align-self-center d-sm-block d-lg-none"></span>
+			<h3 style="color:#17a2b8" class="d-flex justify-content-center mt-5">Join for only $15 triannually.</h3> 
+			<h3 style="color:#17a2b8" class="d-flex justify-content-center"> That's only $5 a month! </h3> 
+			<h3 style="color:#17a2b8" class="d-flex justify-content-center mb-5"> Now that's a deal!</h3> 
+			<section class="standard-plus-features d-flex justify-content-center text-info">
+				<ul>
+					<ul>Standard <span style="color:goldenrod">Plus</span>
+						<ul class="my-1">
+							<li>Create private wikis</li>
+						<li>Collaborate with other premium members</li>		
+						</ul>
+					</ul>
+				</ul>
+			</section>
+        	<form class="d-flex justify-content-center" action="/users/<%=currentUser.id%>/upgrade" method="POST">
+				<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+					data-key="<%=publishableKey%>"
+					data-amount="1500"
+					data-name="Demo Site"
+					data-description="Blocipedia Premium Membership"
+					data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+					data-locale="auto">
+				</script>
+				</form>
+			</section>
+			</form>
+		<% } %>
+		<% if(currentUser && currentUser.role == "premium") { %>
+			<h1>Are you sure you want to downgrade?</h2> 
+			<p>We will set your account back to standard.</p>
+            <p style="font-size:14px" class="text-warning">Warning: your private wikis will now become public</p> 
+			<form action="/users/<%=currentUser.id%>/downgrade" method="POST"> 
+				<button type="submit" class="btn btn-danger text-danger">Downgrade your account</button>
+			</form>
+			<section id="remain-premium">
+				<a href="/" class="btn btn-primary">Cancel</a>
+			</section>
+		<% } %>
+	</main>
+	<% include ../static/partials/baseScripts.ejs %>
+	</body>
+</html> 

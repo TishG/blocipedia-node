@@ -1,5 +1,7 @@
 const userQueries = require("../db/queries.users.js");
 const passport = require("passport");
+const publishableKey = process.env.PUBLISHABLE_KEY;
+const secretKey = process.env.SECRET_KEY;
 
 module.exports = {
     signUp(req, res, next) {
@@ -41,6 +43,19 @@ module.exports = {
       req.logout();
       req.flash("notice", "You've successfully signed out!");
       res.redirect("/");
-        }
+        },
+      upgradeDowngradeForm(req, res, next) {
+        res.render("users/upgrade_downgrade", {publishableKey});
+      },
+      upgrade(req, res, next) {
+        console.log(user);
+        userQueries.upgrade(req.user.dataValues.id);
+        res.render("users/payment_response");
+      },
+    downgrade(req, res, next) {
+      userQuerires.downgrade(req.user.dataValues.id);
+      req.flash("notice", "We're sorry to see you leave premium, your premium membership has been cancelled.");
+      res.redirect("/");
+    }
 
 }
