@@ -34,13 +34,8 @@ module.exports = class ApplicationPolicy {
      }
 
      edit() {
-        if(this.record.private == false) {
-          return this.new() &&
-          this.record && (this._isStandard() || this._isAdmin() || this._isPremium());
-        } else if (this.record.private == true) {
-          return this.new() &&
-          this.record && (this._isStandard() || this._isAdmin() || this._isPremium());
-        }
+        return this.new() &&
+        this.record && (this._isOwner() || this._isAdmin || this._isStandard() || this._isPremium);
       }
 
      update() {
