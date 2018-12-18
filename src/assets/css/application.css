@@ -31,3 +31,8 @@ body {
     padding: 1em;
 }
 
+.downgrade {
+    border: 4px solid #ced4da;
+    padding: 1em;
+}
+

@@ -8,7 +8,7 @@
 	<main class="container">
 	<% include ../static/partials/messages.ejs %>
 		<% if(currentUser && currentUser.role == "standard") { %>
-			<section class="container upgrade mt-5">
+			<section class="container upgrade mt-3 mt-md-5 mb-3 mb-0-none">
 			<h1 style="color:goldenrod" class="d-flex justify-content-center mt-3">Become a premium<span style="color:goldenrod" class="fas fa-plus fa-xs align-self-center ml-1 mr-2 d-none d-lg-block"></span> member today!</h1>
 			<span style="color:goldenrod" class="mt-2 fas fa-plus fa-lg align-self-center d-sm-block d-lg-none"></span>
 			<h3 style="color:#17a2b8" class="d-flex justify-content-center mt-5">Join for only $15 triannually.</h3> 
@@ -24,7 +24,7 @@
 					</ul>
 				</ul>
 			</section>
-        	<form class="d-flex justify-content-center" action="/users/<%=currentUser.id%>/upgrade" method="POST">
+        	<form class="d-flex justify-content-center mt-3 mb-5" action="/users/<%=currentUser.id%>/upgrade" method="POST">
 				<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
 					data-key="<%=publishableKey%>"
 					data-amount="1500"
@@ -38,15 +38,18 @@
 			</form>
 		<% } %>
 		<% if(currentUser && currentUser.role == "premium") { %>
-			<h1>Are you sure you want to downgrade?</h2> 
-			<p>We will set your account back to standard.</p>
-            <p style="font-size:14px" class="text-warning">Warning: your private wikis will now become public</p> 
-			<form action="/users/<%=currentUser.id%>/downgrade" method="POST"> 
-				<button type="submit" class="btn btn-danger text-danger">Downgrade your account</button>
-			</form>
-			<section id="remain-premium">
-				<a href="/" class="btn btn-primary">Cancel</a>
+			<section class="container downgrade mt-3 mt-md-5 mb-3 mb-0-none">
+			<h1 class="text-primary d-flex justify-content-center mt-4">Are you sure you want to cancel premium?</h2>
+			<p style="font-size:12px" class="d-flex justify-content-center text-warning font-weight-bold mt-5 mb-0">Warning: your private wikis will now become public</p>  
+			<section id="remain-premium" class="d-flex justify-content-center">
+				<a href="/" class="btn btn-primary mt-0 mb-2 font-weight-bold">Nevermind, I want to stay a premium member</a>
 			</section>
+			<section class="container d-flex justify-content-center">
+			<form class="d-flex justify-content-denter" action="/users/<%=currentUser.id%>/downgrade" method="POST"> 
+				<button type="submit" class="btn btn-danger text-white font-weight-bold">Cancel Premium</button>
+			</form>
+			</section>
+		</section>
 		<% } %>
 	</main>
 	<% include ../static/partials/baseScripts.ejs %>

@@ -31,7 +31,7 @@ module.exports = {
     })
   },
   upgrade(id, callback) {
-    return User.findById(Id).then((user) => {
+    return User.findById(id).then((user) => {
       if(!user) {
         return callback("User does not exist")
       } else {

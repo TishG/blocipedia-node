@@ -39,22 +39,13 @@ module.exports = {
       })
     },
     deleteWiki(req, callback){
-
           return Wiki.findById(req.params.id)
           .then((wiki) => {
-            const authorized = new Authorizer(req.user, wiki).destroy();
-     
-            if(authorized) {
 
-              wiki.destroy()
-              .then((res) => {
-                callback(null, wiki);
-              });
-              
-            } else {
-              req.flash("notice", "You are not authorized to do that.")
-              callback(401);
-            }
+            wiki.destroy()
+            .then((res) => {
+              callback(null, wiki);
+            });
           })
           .catch((err) => {
             callback(err);
@@ -84,15 +75,11 @@ module.exports = {
              return Wiki.findById(req.params.id)
              .then((wiki) => {
 
-               if(!topic){
+               if(!wiki){
                  return callback("Wiki not found");
                }
 
-               const authorized = new Authorizer(req.user, wiki).update();
-        
-               if(authorized) {
-
-                Wiki.update(updatedWiki, {
+                wiki.update(updatedWiki, {
                    fields: Object.keys(updatedWiki)
                  })
                  .then(() => {
@@ -101,10 +88,6 @@ module.exports = {
                  .catch((err) => {
                    callback(err);
                  });
-               } else {
-                 req.flash("notice", "You are not authorized to do that.");
-                 callback("Forbidden");
-               }
              });
            }
 //       updateWiki(req, updatedWiki, callback){

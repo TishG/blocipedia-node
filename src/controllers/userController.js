@@ -48,14 +48,31 @@ module.exports = {
         res.render("users/upgrade_downgrade", {publishableKey});
       },
       upgrade(req, res, next) {
-        console.log(user);
-        userQueries.upgrade(req.user.dataValues.id);
-        res.render("users/payment_response");
+        userQueries.upgrade(req.params.id, (err, user) => {
+          if(err) {
+            req.flash("error", err);
+            res.redirect("/");
+          } else {
+            res.render("users/payment_response");
+            }
+          })
+        // userQueries.upgrade(req.params.id);
+        // res.render("users/payment_response");
       },
-    downgrade(req, res, next) {
-      userQuerires.downgrade(req.user.dataValues.id);
-      req.flash("notice", "We're sorry to see you leave premium, your premium membership has been cancelled.");
-      res.redirect("/");
+      downgrade(req, res, next) {
+        userQueries.downgrade(req.params.id, (err, user) => {
+          if (err) {
+            console.log(err);
+            req.flash("error", err); 
+            res.redirect("/"); 
+          } else {
+            req.flash("notice", "We're sorry to see you leave premium, your premium membership has been cancelled.");
+            res.redirect("/");
+          }
+        });
+      // userQueries.downgrade(req.params.id);
+      // req.flash("notice", "We're sorry to see you leave premium, your premium membership has been cancelled.");
+      // res.redirect("/");
     }
 
 }
