@@ -1,6 +1,7 @@
 /node_modules
+.env
 /UsersEtildAppDataRoamingnpm
 /.vscode
 /test
-env
+
 
