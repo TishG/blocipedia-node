@@ -56,8 +56,6 @@ module.exports = {
             res.render("users/payment_response");
             }
           })
-        // userQueries.upgrade(req.params.id);
-        // res.render("users/payment_response");
       },
       downgrade(req, res, next) {
         userQueries.downgrade(req.params.id, (err, user) => {
@@ -70,9 +68,6 @@ module.exports = {
             res.redirect("/");
           }
         });
-      // userQueries.downgrade(req.params.id);
-      // req.flash("notice", "We're sorry to see you leave premium, your premium membership has been cancelled.");
-      // res.redirect("/");
     }
 
 }

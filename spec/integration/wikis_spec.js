@@ -61,9 +61,6 @@ describe("routes : wikis", () => {
       form: {
         title: "blink-182 songs",
         body: "What's your favorite blink-182 song?"
-        //,
-        // private: false,
-        // userId: this.user.id
       }
     };
     it("should create a new wiki and redirect", (done) => {
