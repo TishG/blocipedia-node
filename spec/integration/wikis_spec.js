@@ -115,7 +115,7 @@ describe("routes : wikis", () => {
     });
   });
 
-  describe("GET /wikis/:id/edit", () => {
+  fdescribe("GET /wikis/:id/edit", () => {
 
     it("should render a view with an edit wiki form", (done) => {
       request.get(`${base}${this.wiki.id}/edit`, (err, res, body) => {

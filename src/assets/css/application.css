@@ -26,3 +26,13 @@ body {
      font-weight: 500;
  }
 
+.upgrade {
+    border: 4px solid #17a2b8;
+    padding: 1em;
+}
+
+.downgrade {
+    border: 4px solid #ced4da;
+    padding: 1em;
+}
+
