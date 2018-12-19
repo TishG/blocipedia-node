@@ -66,11 +66,11 @@ module.exports = {
             req.flash("error", err); 
             res.redirect("/"); 
           } else {
+            wikiQueries.privateToPublic(req.params.id);
             req.flash("notice", "We're sorry to see you leave premium, your premium membership has been cancelled.");
             res.redirect("/");
           }
         });
-        wikiQueries.privateToPublic(req.params.id);
     }
 
 }

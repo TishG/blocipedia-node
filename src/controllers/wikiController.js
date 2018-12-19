@@ -43,6 +43,7 @@ module.exports = {
                     if(err){
                       res.redirect(500, "wikis/new");
                     } else {
+                      // res.redirect(303, `wikis/${wiki.id}`);
                       res.redirect(303, `wikis/${wiki.id}`);
                     }
                   });
@@ -61,7 +62,8 @@ module.exports = {
         });
       },
       destroy(req, res, next){
-            wikiQueries.deleteWiki(req.params.id, (err, wiki) => {
+            // wikiQueries.deleteWiki(req.params.id, (err, wiki) => {
+              wikiQueries.deleteWiki(req, (err, wiki) => {
               if(err){
                 res.redirect(err, `/wikis/${req.params.id}`)
               } else {
@@ -85,7 +87,7 @@ module.exports = {
             });
           },
           update(req, res, next){
-                wikiQueries.updateWiki(req.params.id, req.body, (err, wiki) => {
+                wikiQueries.updateWiki(req, req.body, (err, wiki) => {
                   if(err || wiki == null){
                     res.redirect(401, `/wikis/${req.params.id}/edit`);
                   } else {

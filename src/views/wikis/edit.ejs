@@ -8,14 +8,14 @@
 
     <main class="container">
 
-      <h1>Edit Wiki</h1>
+      <h1 class="text-info text-md-center">Edit Wiki</h1>
       <form action="/wikis/<%= wiki.id %>/update" method="post">
-        <div class="form-group">
+        <div class="form-group text-info">
           <label for="title">Wiki title</label>
           <input value="<%= wiki.title %>" type="text" class="form-control" name="title" aria-describedby="titleHelp" placeholder="Enter Title">
         </div>
-        <div class="form-group">
-          <label for="body">Body</label>
+        <div class="form-group text-info">
+          <label class="text-info text-md-center" for="body">Body</label>
           <textarea rows="30" class="form-control" name="body" placeholder="Enter Body"><%= wiki.body %></textarea>
         </div>
         <% if((currentUser && (currentUser.role === "admin" || currentUser.role === "premium")) && wiki.userId === currentUser.id){ %>
@@ -25,7 +25,9 @@
             <option value="false">Public Wiki</option>
           </select>
         <% } %>
-        <button type="submit" class="btn btn-primary">Update</button>
+        <section id="editPageUpdateButton" class="d-flex justify-content-end justify-content-md-start">
+          <button type="submit" class="btn btn-primary mb-3">Update</button>
+        </section>
       </form>
     </main>
 

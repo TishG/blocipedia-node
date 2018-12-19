@@ -29,8 +29,7 @@ module.exports = {
       })
     },
     getWiki(id, callback){
-      return Wiki.findById(id, {
-      })
+      return Wiki.findById(id)
       .then((wiki) => {
         callback(null, wiki);
       })
@@ -51,10 +50,11 @@ module.exports = {
     //         callback(err);
     //       });
     //     },
+
     deleteWiki(req, callback){
         return Wiki.findById(req.params.id)
         .then((wiki) => {
-          const authorized = new Authorizer(req.user, wiki).destroy();
+          const authorized = new Authorizer(req.user, wiki.destroy());
           if(authorized) {
             wiki.destroy()
             .then((res) => {
@@ -69,8 +69,11 @@ module.exports = {
           callback(err);
         });
       },
+
       updateWiki(req, updatedWiki, callback){
              return Wiki.findById(req.params.id)
+          // updateWiki(id, updatedWiki, callback){
+          // return Wiki.findById(id)
              .then((wiki) => {
                if(!wiki){
                  return callback("Wiki not found");

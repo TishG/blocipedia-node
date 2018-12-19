@@ -9,12 +9,15 @@
     <main class="container">
       <% if(currentUser) { %>
       <h1 class="d-flex justify-content-md-center text-info my-3"><%= wiki.title %></h1>
-      <a href="/wikis/<%= wiki.id %>/edit" class="btn btn-warning">Edit</a>
+     <p class="d-flex justify-content-md-center"><%= wiki.body %></p>
+     <section class="d-flex justify-content-md-center mt-2">
+      <a href="/wikis/<%= wiki.id %>/edit" class="btn btn-warning mr-1">Edit</a>
       <form style="display:initial" action="/wikis/<%= wiki.id %>/destroy" method="post">
         <button type="submit" class="btn btn-danger">Delete</button>
       </form>
-     <p class="d-flex justify-content-md-center"><%= wiki.body %></p>
+    </section>
      <% } else { %>
+      <a class="d-flex justify-content-left text-info" href="/wikis">back</a>
       <h1 class="d-flex justify-content-md-center text-info my-3"><%= wiki.title %></h1>
       <p class="d-flex justify-content-md-center"><%= wiki.body %></p>
      <% } %>
