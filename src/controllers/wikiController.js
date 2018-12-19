@@ -11,6 +11,16 @@ module.exports = {
           }
         })
       },
+      privateIndex(req, res, next) {
+        wikiQueries.getAllWikis((err, wikis) => {
+          if(err){
+            res.redirect(500, "static/index");
+          } else {
+          res.render("wikis/privateIndex", {wikis});
+          }
+        })
+      },
+
       new(req, res, next){
             const authorized = new Authorizer(req.user).new();    
             if(authorized) {
@@ -51,7 +61,7 @@ module.exports = {
         });
       },
       destroy(req, res, next){
-            wikiQueries.deleteWiki(req, (err, wiki) => {
+            wikiQueries.deleteWiki(req.params.id, (err, wiki) => {
               if(err){
                 res.redirect(err, `/wikis/${req.params.id}`)
               } else {
@@ -75,7 +85,7 @@ module.exports = {
             });
           },
           update(req, res, next){
-                wikiQueries.updateWiki(req, req.body, (err, wiki) => {
+                wikiQueries.updateWiki(req.params.id, req.body, (err, wiki) => {
                   if(err || wiki == null){
                     res.redirect(401, `/wikis/${req.params.id}/edit`);
                   } else {

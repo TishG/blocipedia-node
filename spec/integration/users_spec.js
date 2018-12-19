@@ -105,4 +105,7 @@ describe("routes : users", () => {
         });
       });
 
+      //implement tests for:
+      //GET /users/upgrade GET /users/downgrade POST /users/:id/upgrade POST/users/:id/downgrade
+
 });

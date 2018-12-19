@@ -1,4 +1,5 @@
 const userQueries = require("../db/queries.users.js");
+const wikiQueries = require("../db/queries.wikis.js");
 const passport = require("passport");
 const publishableKey = process.env.PUBLISHABLE_KEY;
 const secretKey = process.env.SECRET_KEY;
@@ -25,25 +26,25 @@ module.exports = {
              }
            });
          },
-    signInForm(req, res, next) {
-    res.render("users/sign_in");
-        },
-    signIn(req, res, next) {
-      passport.authenticate("local")(req, res, function () {
-        if(!req.user) {
-          req.flash("notice", "Sign in failed. Please try again.")
-          res.redirect("/users/sign_in");
-        } else {
-          req.flash("notice", "You've successfully signed in!");
-          res.redirect("/");
-            }
-          })
-        },
-    signOut(req, res, next) {
-      req.logout();
-      req.flash("notice", "You've successfully signed out!");
-      res.redirect("/");
-        },
+      signInForm(req, res, next) {
+      res.render("users/sign_in");
+          },
+      signIn(req, res, next) {
+        passport.authenticate("local")(req, res, ()=> {
+          if(!req.user) {
+            req.flash("notice", "Sign in failed. Please try again.")
+            res.redirect("/users/sign_in");
+          } else {
+            req.flash("notice", "You've successfully signed in!");
+            res.redirect("/");
+              }
+            })
+          },
+      signOut(req, res, next) {
+        req.logout();
+        req.flash("notice", "You've successfully signed out!");
+        res.redirect("/");
+          },
       upgradeDowngradeForm(req, res, next) {
         res.render("users/upgrade_downgrade", {publishableKey});
       },
@@ -54,6 +55,7 @@ module.exports = {
             res.redirect("/");
           } else {
             res.render("users/payment_response");
+              res.redirect("/");
             }
           })
       },
@@ -68,6 +70,7 @@ module.exports = {
             res.redirect("/");
           }
         });
+        wikiQueries.privateToPublic(req.params.id);
     }
 
 }

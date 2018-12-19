@@ -5,16 +5,27 @@
   </head>
   <body>
     <% include ../static/partials/navbar.ejs %>
-    <main class="container">
-      <h1>Wikis</h1>
-        <a href="/wikis/new" class="btn btn-success">New Wiki</a>
+    <main class="container mb-2">
+        <% include ../static/partials/messages.ejs %>
+        <% if(currentUser) { %>
+      <h1 class="text-info text-center mt-2">Wikis</h1>
+        <a href="/wikis/new" class="btn btn-success mb-1">Create New Wiki</a>
       <ul class="list-group">
         <% wikis.forEach((wiki) => { %>
-          <li class="list-group-item">
+          <li class="list-group-item mb-1">
             <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
           </li>
         <% }) %>
       </ul>
+      <% } else { %>
+        <h1 class="text-info text-center mt-2">Wikis</h1>
+        <% wikis.forEach((wiki) => { %>
+          <li class="list-group-item mb-1">
+            <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
+          </li>
+        <% }) %>
+      </ul>
+      <% } %>
     </main>
   </body>
 </html>
