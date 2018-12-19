@@ -44,7 +44,8 @@ module.exports = {
                       res.redirect(500, "wikis/new");
                     } else {
                       // res.redirect(303, `wikis/${wiki.id}`);
-                      res.redirect(303, `wikis/${wiki.id}`);
+                      // res.redirect(`/wikis/${newWiki.userId}`)
+                      res.redirect(`/wikis/${req.params.id}`)
                     }
                   });
                 } else {
