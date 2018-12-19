@@ -17,7 +17,18 @@
           <label for="body">Wiki body</label>
           <textarea rows="30" class="form-control" name="body" placeholder="Enter Wiki body"></textarea>
         </div>
-        <div class="d-flex flex-row-reverse flex-md-row">
+        
+        <div>
+          <% if(currentUser !== "standard") { %>
+            <div class="form-group">
+                <label for="privateOption">Would you like to set this wiki to private? </label>
+                <select classs = "form-control" name="privateOption">
+                  <option value = "true">Yes</option>
+                  <option value = "false">No</option>
+                </select>
+              </div>
+          <% } %>
+
         <button type="submit" class="btn btn-primary mb-3">Submit</button>
       </div>
       </form>

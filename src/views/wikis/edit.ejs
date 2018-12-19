@@ -18,6 +18,13 @@
           <label for="body">Body</label>
           <textarea rows="30" class="form-control" name="body" placeholder="Enter Body"><%= wiki.body %></textarea>
         </div>
+        <% if((currentUser && (currentUser.role === "admin" || currentUser.role === "premium")) && wiki.userId === currentUser.id){ %>
+          <label for="privatOption">Make wiki private?</label>
+          <select class="form-control" name="privateOption">
+            <option value="true">Private Wiki</option>
+            <option value="false">Public Wiki</option>
+          </select>
+        <% } %>
         <button type="submit" class="btn btn-primary">Update</button>
       </form>
     </main>

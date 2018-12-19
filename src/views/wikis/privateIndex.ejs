@@ -8,12 +8,18 @@
     <main class="container mb-2">
     <% include ../static/partials/messages.ejs %>
       <h1 class="text-info text-center mt-2">Private Wikis</h1>
+
+      <% if(currentUser) { %>
         <a href="/wikis/new" class="btn btn-success mb-1">Create New Wiki</a> 
+      <% } %>
+
       <ul class="list-group">
         <% wikis.forEach((wiki) => { %>
+          <% if((currentUser && (currentUser.role === "admin" || currentUser.role === "premium")) && wiki.private === true){ %>
           <li class="list-group-item mb-1">
             <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
           </li>
+          <% } %>
         <% }) %>
       </ul>
     </main>
