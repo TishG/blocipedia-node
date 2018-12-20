@@ -7,10 +7,10 @@
     <% include ../static/partials/navbar.ejs %>
 
     <main class="container">
-        <a style="font-size:16px" class="d-flex justify-content-left text-info mt-1" href="/wikis">back</a>
+        <a style="font-size:16px" class="d-flex justify-content-left text-info mt-1" href="/wikis"><span class="fas fa-arrow-left mt-1 mr-1"></span>back</a>
       <% if(currentUser) { %>
-      <h1 class="d-flex justify-content-md-center text-info my-3"><%= wiki.title %></h1>
-     <p class="d-flex justify-content-md-center"><%= wiki.body %></p>
+      <h1 class="d-flex justify-content-md-center text-info my-3"><%- wiki.title %></h1>
+     <p class="d-flex justify-content-md-center"><%- wiki.body %></p>
      <section class="d-flex justify-content-md-center mt-2">
       <a href="/wikis/<%= wiki.id %>/edit" class="btn btn-warning mr-1">Edit</a>
       <form style="display:initial" action="/wikis/<%= wiki.id %>/destroy" method="post">
@@ -18,8 +18,8 @@
       </form>
     </section>
      <% } else { %>
-      <h1 class="d-flex justify-content-md-center text-info my-3"><%= wiki.title %></h1>
-      <p class="d-flex justify-content-md-center"><%= wiki.body %></p>
+      <h1 class="d-flex justify-content-md-center text-info my-3"><%- wiki.title %></h1>
+      <p class="d-flex justify-content-md-center"><%- wiki.body %></p>
      <% } %>
     </main>
 
