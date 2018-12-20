@@ -8,10 +8,7 @@
             <ul class="navbar-nav ml-auto">
             <% if(currentUser && currentUser.role === "premium") { %>  
             <li class="nav-item">
-              <a class="nav-link" href="/wikis">Public Wikis</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/wikis/private">Private Wikis</a>
+              <a class="nav-link" href="/wikis">Wikis</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="/users/sign_out">Sign out</a>
@@ -26,7 +23,7 @@
             </li>
               <% } else if(currentUser) { %>
                 <li class="nav-item">
-                  <a class="nav-link" href="/wikis">Public Wikis</a>
+                  <a class="nav-link" href="/wikis">Wikis</a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="/users/sign_out">Sign out</a>
@@ -41,7 +38,7 @@
                 </li>
                   <% } else { %> 
               <li class="nav-item">
-                <a class="nav-link" href="/wikis">Public Wikis</a>
+                <a class="nav-link" href="/wikis">Wikis</a>
               </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/users/sign_up">Sign up</a>

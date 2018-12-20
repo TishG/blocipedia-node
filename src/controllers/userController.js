@@ -55,7 +55,7 @@ module.exports = {
             res.redirect("/");
           } else {
             res.render("users/payment_response");
-              res.redirect("/");
+              res.render("/");
             }
           })
       },
@@ -67,8 +67,9 @@ module.exports = {
             res.redirect("/"); 
           } else {
             wikiQueries.privateToPublic(req.params.id);
-            req.flash("notice", "We're sorry to see you leave premium, your premium membership has been cancelled.");
-            res.redirect("/");
+            // req.flash("notice", "We're sorry to see you leave premium, your premium membership has been cancelled.");
+            // res.redirect("/");
+            res.render("/");
           }
         });
     }

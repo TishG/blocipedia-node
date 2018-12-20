@@ -7,6 +7,7 @@
     <% include ../static/partials/navbar.ejs %>
 
     <main class="container">
+        <a style="font-size:16px" class="d-flex justify-content-left text-info mt-1" href="/wikis">back</a>
       <% if(currentUser) { %>
       <h1 class="d-flex justify-content-md-center text-info my-3"><%= wiki.title %></h1>
      <p class="d-flex justify-content-md-center"><%= wiki.body %></p>
@@ -17,7 +18,6 @@
       </form>
     </section>
      <% } else { %>
-      <a class="d-flex justify-content-left text-info" href="/wikis">back</a>
       <h1 class="d-flex justify-content-md-center text-info my-3"><%= wiki.title %></h1>
       <p class="d-flex justify-content-md-center"><%= wiki.body %></p>
      <% } %>
