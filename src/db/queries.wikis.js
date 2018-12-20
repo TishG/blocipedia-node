@@ -37,19 +37,6 @@ module.exports = {
         callback(err);
       })
     },
-    // deleteWiki(req, callback){
-    //       return Wiki.findById(req.params.id)
-    //       .then((wiki) => {
-
-    //         wiki.destroy()
-    //         .then((res) => {
-    //           callback(null, wiki);
-    //         });
-    //       })
-    //       .catch((err) => {
-    //         callback(err);
-    //       });
-    //     },
 
     deleteWiki(req, callback){
         return Wiki.findById(req.params.id)
@@ -72,8 +59,6 @@ module.exports = {
 
       updateWiki(req, updatedWiki, callback){
              return Wiki.findById(req.params.id)
-          // updateWiki(id, updatedWiki, callback){
-          // return Wiki.findById(id)
              .then((wiki) => {
                if(!wiki){
                  return callback("Wiki not found");
