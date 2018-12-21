@@ -16,6 +16,15 @@ describe("routes : wikis", () => {
           })
           .then((user) => {
             this.user = user;
+            request.get({
+              url: 'http://localhost:3000/auth/fake',
+              form: {
+                  role: user.role,
+                  userId: user.id,
+                  email: user.email,
+                  password: user.password
+              }
+            })
             Wiki.create({
               title: "JS Frameworks",
               body: "There is a lot of them",
@@ -136,7 +145,7 @@ describe("routes : wikis", () => {
     });
   });
 
-  fdescribe("GET /wikis/:id/edit", () => {
+  describe("GET /wikis/:id/edit", () => {
 
     it("should render a view with an edit wiki form", (done) => {
       request.get(`${base}${this.wiki.id}/edit`, (err, res, body) => {

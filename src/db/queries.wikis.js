@@ -1,6 +1,7 @@
 const Wiki = require("./models").Wiki;
 const User = require("./models").User;
 const Authorizer = require("../policies/wiki");
+const Collaborator =  require("./models").Collaborator;
 
 module.exports = {
 
@@ -29,7 +30,12 @@ module.exports = {
       })
     },
     getWiki(id, callback){
-      return Wiki.findById(id)
+      return Wiki.findById(id, {
+              include: [{
+                model: Collaborator,
+                as: "collaborators"
+              }]
+            })
       .then((wiki) => {
         callback(null, wiki);
       })
@@ -38,24 +44,35 @@ module.exports = {
       })
     },
 
-    deleteWiki(req, callback){
-        return Wiki.findById(req.params.id)
-        .then((wiki) => {
-          const authorized = new Authorizer(req.user, wiki.destroy());
-          if(authorized) {
-            wiki.destroy()
-            .then((res) => {
-              callback(null, wiki);
-            });      
-          } else {
-            req.flash("notice", "You are not authorized to do that.")
-            callback(401);
-          }
-        })
-        .catch((err) => {
+    // deleteWiki(req, callback){
+    //     return Wiki.findById(req.params.id)
+    //     .then((wiki) => {
+    //       const authorized = new Authorizer(req.user, wiki.destroy());
+    //       if(authorized) {
+    //         wiki.destroy()
+    //         .then((res) => {
+    //           callback(null, wiki);
+    //         });      
+    //       } else {
+    //         req.flash("notice", "You are not authorized to do that.")
+    //         callback(401);
+    //       }
+    //     })
+    //     .catch((err) => {
+    //       callback(err);
+    //     });
+    //   },
+      deleteWiki(id, callback){
+      return Wiki.destroy({
+          where: {id}
+      })
+      .then((wiki) => {
+          callback(null, wiki);
+      })
+      .catch((err) => {
           callback(err);
-        });
-      },
+      })
+  },
 
       updateWiki(req, updatedWiki, callback){
              return Wiki.findById(req.params.id)

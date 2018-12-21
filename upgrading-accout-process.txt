@@ -1,5 +1,0 @@
-1) User clicks the button to join on the premium card
-2) they navigate to a page that briefly tells them they are joining premium, what it offers, and another button to officially join.
-3) When button is clicked, stripe pop up comes up asking them for payment, once "payment" is made users role becomes "premium".
-4) User can create "private wikis" (wikis that cannot be seen by any other users)
-5) User can cancel "premium" downgrading back to "standard". 
