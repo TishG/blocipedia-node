@@ -55,7 +55,7 @@ module.exports = {
             res.redirect("/");
           } else {
             res.render("users/payment_response");
-              res.render("/");
+            res.redirect("/");
             }
           })
       },

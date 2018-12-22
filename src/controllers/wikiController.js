@@ -49,6 +49,7 @@ module.exports = {
               } else {
                 wiki.body = markdown.toHTML(wiki.body);
                 wiki.title = markdown.toHTML(wiki.title);
+                console.log(wiki.collaborators);
                 res.render("wikis/show", {wiki});
               }
             });

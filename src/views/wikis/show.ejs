@@ -6,23 +6,6 @@
   <body>
     <% include ../static/partials/navbar.ejs %>
 
-    <!-- <main class="container text-left text-md-center">
-        <a style="font-size:16px" class="d-flex justify-content-left text-info mt-1" href="/wikis"><span class="fas fa-arrow-left mt-1 mr-1"></span>back</a>
-      <% if(currentUser) { %>
-      <h1 class="text-info my-3"><%- wiki.title %></h1>
-     <p><%- wiki.body %></p>
-     <section class="d-flex justify-content-md-center mt-2">
-      <a href="/wikis/<%= wiki.id %>/edit" class="btn btn-warning mr-1">Edit</a>
-      <form style="display:initial" action="/wikis/<%= wiki.id %>/destroy" method="post">
-        <button type="submit" class="btn btn-danger">Delete</button>
-      </form>
-    </section>
-     <% } else { %>
-      <h1 class="d-flex justify-content-md-center text-info my-3"><%- wiki.title %></h1>
-      <p class="d-flex justify-content-md-center"><%- wiki.body %></p>
-     <% } %>
-    </main> -->
-
     <main class="container col-12 m-2">
         <a style="font-size:16px" class="text-info" href="/wikis">
           <span class="fas fa-arrow-left mt-1 mr-1"></span>
@@ -53,7 +36,8 @@
     <ul class="list-group">
       <% wiki.collaborators.forEach((collaborator) => { %>
       <li class="list-group-item">
-          <%= collaborator.user.email %></a>
+          <!-- <%= collaborator.userId %></a> -->
+          <%= collaborator.User.email %></a>
           <form style="display:initial" action="/wikis/<%= wiki.id %>/collaborators/<%= collaborator.id %>/remove"
               method="post">
               <button type="submit" class="btn btn-danger">Remove</button>

@@ -7,23 +7,25 @@ module.exports = {
    addCollaborator(req, callback) {
        User.findOne({
            where: {
-               email: req.body.collaborator
+               email: req.body.addCollaborator
            }
        })
        .then((user) => {
+        //    console.log(user);
         if(!user) {
            return callback('User not found.'); 
         } else if(user.id === req.user.id) {
             return callback('You are not allowed to add yourself as a collaborator.')
         }
-        Collaborator.findOne({
+        Collaborator.findAll({
                 where: {
-                    userId: user.id,
+                    userId: users[0].id,
                     wikiId: req.params.wikiId
                 }
             })
-        .then((collaborator) => {
-            if(collaborator) {
+        .then((collaborators) => {
+            console.log(collaborators)
+            if(collaborators.length !== 0) {
                 return callback('User is already a collaborator.');
             }
             return Collaborator.create({
