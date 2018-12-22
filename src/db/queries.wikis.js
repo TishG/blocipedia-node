@@ -37,6 +37,7 @@ module.exports = {
               }]
             })
       .then((wiki) => {
+        console.log(wiki);
         callback(null, wiki);
       })
       .catch((err) => {

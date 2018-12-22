@@ -17,15 +17,14 @@ module.exports = {
         } else if(user.id === req.user.id) {
             return callback('You are not allowed to add yourself as a collaborator.')
         }
-        Collaborator.findAll({
+        Collaborator.findOne({
                 where: {
-                    userId: users[0].id,
+                    userId: user.id,
                     wikiId: req.params.wikiId
                 }
             })
-        .then((collaborators) => {
-            console.log(collaborators)
-            if(collaborators.length !== 0) {
+        .then((collaborator) => {
+            if(collaborator) {
                 return callback('User is already a collaborator.');
             }
             return Collaborator.create({
@@ -48,25 +47,28 @@ module.exports = {
             })                   
         },
         
-        removeCollaborator(req, callback) {
+        removeCollaborator(req, wiki, callback) {
             let collabId = req.body.collaborator;
+            // console.log(req.body.collaborator)
             const authorized = new Authorizer(req.user, wiki, collabId).destroy();
             if(authorized) {
                 Collaborator.destroy({
                     where: {
                         userId: collabId,
+                        // userId: Collaborator.userId,
                         wikiId: req.params.wikiId
                     }
                 })
-                .then((deletedRecordsCount) => {
-                    callback(null, deletedRecordsCount);
-                })
+                // .then((deletedRecordsCount) => {
+                //     callback(null, deletedRecordsCount);
+                // })
                 .catch((err) => {
-                    callback(err);
+                    // callback(err);
+                    console.log(err);
                 })
             } else {
                 req.flash('notice', 'You are not authorized to do that.');
-                callback(401);
+                // callback(401);
             }
         }
 
