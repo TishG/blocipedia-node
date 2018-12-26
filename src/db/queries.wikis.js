@@ -5,26 +5,9 @@ const Authorizer = require("../policies/application");
 
 module.exports = {
 
-  // getAllWikis(callback){
-  //   return Wiki.all()
+  getAllWikis(callback){
+    return Wiki.all()
 
-  //   .then((wikis) => {
-  //     callback(null, wikis);
-  //   })
-  //   .catch((err) => {
-  //     callback(err);
-  //   })
-  // },
-  getAllWikis(req, callback){
-    console.log(wiki);
-    console.log(req.body);
-    return Wiki.findAll({
-
-        include: [{
-             model: Collaborator, as: "collaborators", attributes: ["userId"]
-        }],
-          where: {userId: req.user.id}
-    })
     .then((wikis) => {
       callback(null, wikis);
     })
@@ -32,6 +15,20 @@ module.exports = {
       callback(err);
     })
   },
+  // getAllWikis(req, callback){
+  //   return Wiki.findAll({
+  //       include: [{
+  //            model: Collaborator, as: "collaborators", attributes: ["userId"]
+  //       }],
+  //         where: {userId: req.user.id}
+  //   })
+  //   .then((wikis) => {
+  //     callback(null, wikis);
+  //   })
+  //   .catch((err) => {
+  //     callback(err);
+  //   })
+  // },
     addWiki(newWiki, callback){
       return Wiki.create({
         title: newWiki.title,
