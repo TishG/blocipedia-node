@@ -16,19 +16,26 @@ module.exports = {
     })
   },
   // getAllWikis(req, callback){
-  //   return Wiki.findAll({
+  //   const authorized = new Authorizer(req.user, wiki.findAll());
+  //   if(authorized) {
+  //   return Wiki.findAll({   
   //       include: [{
-  //            model: Collaborator, as: "collaborators", attributes: ["userId"]
+  //           model: Collaborator, as: "collaborators", attributes: ["userId"]
   //       }],
-  //         where: {userId: req.user.id}
+  //         where: {userId: req.user.id}    
   //   })
-  //   .then((wikis) => {
-  //     callback(null, wikis);
-  //   })
-  //   .catch((err) => {
-  //     callback(err);
-  //   })
-  // },
+  //   .then((res) => {
+  //           callback(null, wiki);   
+  //         })  
+  //       } else {
+  //         req.flash("notice", "You are not authorized to do that.")
+  //         callback(401);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       callback(err);
+  //     });
+  //   },
     addWiki(newWiki, callback){
       return Wiki.create({
         title: newWiki.title,
