@@ -35,8 +35,8 @@ module.exports = {
   //     callback(401);
   //   }
   // },
-  getAllWikis(req, user, callback){
-    const authorized = new Authorizer(req.user, user, Wiki.findAll());
+  getAllWikis(req, callback){
+    const authorized = new Authorizer(req.user, Wiki.findAll());
     if(authorized) {
       return Wiki.findAll({   
         include: [{
