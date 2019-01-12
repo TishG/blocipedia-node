@@ -1,8 +1,8 @@
 const userQueries = require("../db/queries.users.js");
 const wikiQueries = require("../db/queries.wikis.js");
 const passport = require("passport");
-const publishableKey = process.env.PUBLISHABLE_KEY;
-const secretKey = process.env.SECRET_KEY;
+const stripePublishableKey = process.env.STRIPE_P_KEY;
+const stripeSecretKey = process.env.STRIPE_S_KEY;
 
 module.exports = {
     signUp(req, res, next) {
@@ -46,7 +46,7 @@ module.exports = {
         res.redirect("/");
           },
       upgradeDowngradeForm(req, res, next) {
-        res.render("users/upgrade_downgrade", {publishableKey});
+        res.render("users/upgrade_downgrade", {stripePublishableKey});
       },
       upgrade(req, res, next) {
         userQueries.upgrade(req.params.id, (err, user) => {
