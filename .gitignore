@@ -1,8 +1,5 @@
 /node_modules
 .env
-/UsersEtildAppDataRoamingnpm
-/.vscode
-/test
-.sequelizerc
+
 
 
