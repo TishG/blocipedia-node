@@ -6,7 +6,7 @@
   "scripts": {
     "test": "set NODE_ENV=test&& jasmine",
     "start": "node src/server.js",
-    "database": "pg_ctl -D C:/PostgreSQL/data/pg10"
+    "database": "pg_ctl -D C:/PostgreSQL/pg10"
   },
   "author": "Tish Griffiths",
   "license": "ISC",
