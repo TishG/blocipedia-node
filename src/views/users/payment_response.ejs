@@ -11,7 +11,12 @@
 
       <% include ../static/partials/messages.ejs %>
       <h2 class="text-primary mt-3">Your payment of $15.00 has been processed. You are now a premium member, Enjoy! </h2>
-
+      <script>
+        setTimeout(function () {
+           // after 2 seconds
+           window.location = "/";
+        }, 2000)
+      </script>
     </main>
 
     <% include ../static/partials/baseScripts.ejs %>

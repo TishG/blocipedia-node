@@ -26,7 +26,7 @@
 			</section>
         	<form class="d-flex justify-content-center mt-3 mb-5" action="/users/<%=currentUser.id%>/upgrade" method="POST">
 				<script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-					data-key="<%=publishableKey%>"
+					data-key="<%=stripePublishableKey%>"
 					data-amount="1500"
 					data-name="Demo Site"
 					data-description="Blocipedia Premium Membership"
