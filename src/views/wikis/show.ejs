@@ -46,8 +46,24 @@
       <% }) %>
   </ul>
       </section>
+   <% } else if { %> 
+    <section class="d-flex justify-content-center mt-2">
+      <a href="/wikis/<%= wiki.id %>/edit" class="btn btn-warning mr-1">Edit</a>
+    </section> 
+    <h3 class="text-info mt-4">Collaborators</h3>
+    <ul class="list-group">
+      <% wiki.collaborators.forEach((collaborator) => { %>
+      <li class="list-group-item">
+          <!-- <%= collaborator.userId %></a> -->
+          <%= collaborator.userId %></a>
+          <form style="display:initial" action="/wikis/<%= wiki.id %>/collaborators/<%= collaborator.id %>/remove"
+              method="post">
+          </form>
+      </li>
+      <% }) %>
+  </ul>
     <% } %>
-   <% } %> 
+    <% } >
   </main>
 
     <% include ../static/partials/baseScripts.ejs %>

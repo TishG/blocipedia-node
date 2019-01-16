@@ -4,37 +4,6 @@ const Collaborator =  require("./models").Collaborator;
 const Authorizer = require("../policies/application");
 
 module.exports = {
-
-  // getAllWikis(callback){
-  //   return Wiki.all()
-
-  //   .then((wikis) => {
-  //     callback(null, wikis);
-  //   })
-  //   .catch((err) => {
-  //     callback(err);
-  //   })
-  // },
-  // getAllWikis(req, callback){
-  //   const authorized = new Authorizer(req.user, wiki.findAll());
-  //   if(authorized) {
-  //     return Wiki.findAll({   
-  //       include: [{
-  //         model: Collaborator, as: "collaborators", attributes: ["userId"]
-  //       }],
-  //       where: {userId: req.user.id}    
-  //     })
-  //     .then((res) => {
-  //       callback(null, wiki);   
-  //     })
-  //     .catch((err) => {
-  //       callback(err);
-  //     });
-  //   } else {
-  //     req.flash("notice", "You are not authorized to do that.")
-  //     callback(401);
-  //   }
-  // },
   getAllWikis(req, callback){
     const authorized = new Authorizer(req.user, Wiki.findAll());
     if(authorized) {

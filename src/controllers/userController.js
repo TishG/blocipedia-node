@@ -50,22 +50,12 @@ module.exports = {
         res.render("users/upgrade_downgrade", {stripePublishableKey});
       },
       upgrade(req, res, next) {
-        // userQueries.upgrade(req.params.id, (err, user) => {
-        //   if(err) {
-        //     req.flash("error", err);
-        //     res.redirect("/");
-        //   } else {
-        //     res.render("users/payment_response");
-        //     res.redirect("/");
-        //     }
-        //   })
-        var callback = (err) => {
+        const callback = (err) => {
           if(err) {
             req.flash("error", err);
             res.redirect("/");
           } else {
             res.render("users/payment_response")
-            // res.redirect("/");
           }
         };
         userQueries.upgrade(req.params.id, callback);

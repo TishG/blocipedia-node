@@ -4,14 +4,23 @@ const markdown = require( "markdown" ).markdown;
 
 module.exports = {
         index(req, res, next){
-          wikiQueries.getAllWikis((err, wikis) => {
-              if(err){
-                res.redirect(500, "static/index");
-              } else {
-              res.render("wikis/index", {wikis});
-              }
-            })
-          },
+          // wikiQueries.getAllWikis((err, wikis) => {
+          //     if(err){
+          //       res.redirect(500, "static/index");
+          //     } else {
+          //     res.render("wikis/index", {wikis});
+          //     }
+          //   })
+          // },
+          const callback = (err, wikis) => {
+            if(err){
+              res.redirect(500, "static/index");
+            } else {
+            res.render("wikis/index", {wikis});
+            }
+          }
+          wikiQueries.getAllWikis(req, callback)
+        },
         new(req, res, next){
               const authorized = new Authorizer(req.user).new();    
               if(authorized) {
