@@ -6,22 +6,65 @@
   <body>
     <% include ../static/partials/navbar.ejs %>
 
-    <main class="container">
-        <a style="font-size:16px" class="d-flex justify-content-left text-info mt-1" href="/wikis"><span class="fas fa-arrow-left mt-1 mr-1"></span>back</a>
-      <% if(currentUser) { %>
-      <h1 class="d-flex justify-content-md-center text-info my-3"><%- wiki.title %></h1>
-     <p class="d-flex justify-content-md-center"><%- wiki.body %></p>
-     <section class="d-flex justify-content-md-center mt-2">
-      <a href="/wikis/<%= wiki.id %>/edit" class="btn btn-warning mr-1">Edit</a>
-      <form style="display:initial" action="/wikis/<%= wiki.id %>/destroy" method="post">
-        <button type="submit" class="btn btn-danger">Delete</button>
+    <main class="container col-12 m-2">
+        <a style="font-size:16px" class="text-info" href="/wikis">
+          <span class="fas fa-arrow-left mt-1 mr-1"></span>
+          back
+       </a>
+      <section class="container text-center">
+        <h1 class="text-info my-3 ml-2"><%- wiki.title %></h1>
+        <p class="ml-2"><%- wiki.body %></p>
+      </section>
+    <% if(currentUser) { %>
+      <section class="d-flex justify-content-center mt-2">
+        <a href="/wikis/<%= wiki.id %>/edit" class="btn btn-warning mr-1">Edit</a>
+        <form style="display:initial" action="/wikis/<%= wiki.id %>/destroy" method="post">
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </section> 
+      <% if(currentUser.role === "admin" || (currentUser.role === "premium" && currentUser.id == wiki.userId && wiki.private)) { %>
+        <section id="collaborators" class="container m-5">
+        <form action="/wikis/<%= wiki.id %>/collaborators/add" method="post">
+          <section style="display:inline-block" class="form-group">
+              <label for="addCollaborator">You may add collaborators to this wiki</label>
+              <input style="width:300px" type="text" class="form-control" name="addCollaborator" aria-describedby="addCollaboratorHelp"
+                  placeholder="Enter user's email here">
+          </section>
+          <button type="submit" class="btn btn-primary mb-1">Add Collaborator</button>
       </form>
-    </section>
-     <% } else { %>
-      <h1 class="d-flex justify-content-md-center text-info my-3"><%- wiki.title %></h1>
-      <p class="d-flex justify-content-md-center"><%- wiki.body %></p>
-     <% } %>
-    </main>
+    <h3 class="text-info mt-4">Collaborators</h3>
+    <ul class="list-group">
+      <% wiki.collaborators.forEach((collaborator) => { %>
+      <li class="list-group-item">
+          <!-- <%= collaborator.userId %></a> -->
+          <%= collaborator.userId %></a>
+          <form style="display:initial" action="/wikis/<%= wiki.id %>/collaborators/<%= collaborator.id %>/remove"
+              method="post">
+              <button type="submit" class="btn btn-danger">Remove</button>
+          </form>
+      </li>
+      <% }) %>
+  </ul>
+      </section>
+   <% } else if { %> 
+    <section class="d-flex justify-content-center mt-2">
+      <a href="/wikis/<%= wiki.id %>/edit" class="btn btn-warning mr-1">Edit</a>
+    </section> 
+    <h3 class="text-info mt-4">Collaborators</h3>
+    <ul class="list-group">
+      <% wiki.collaborators.forEach((collaborator) => { %>
+      <li class="list-group-item">
+          <!-- <%= collaborator.userId %></a> -->
+          <%= collaborator.userId %></a>
+          <form style="display:initial" action="/wikis/<%= wiki.id %>/collaborators/<%= collaborator.id %>/remove"
+              method="post">
+          </form>
+      </li>
+      <% }) %>
+  </ul>
+    <% } %>
+    <% } >
+  </main>
 
     <% include ../static/partials/baseScripts.ejs %>
 

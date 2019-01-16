@@ -38,6 +38,7 @@ module.exports = class ApplicationPolicy {
         this.record && (this._isAdmin || this._isStandard() || this._isPremium());
       }
 
+
      update() {
        return this.edit();
      }

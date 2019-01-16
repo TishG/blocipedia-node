@@ -3,6 +3,10 @@ const wikiQueries = require("../db/queries.wikis.js");
 const passport = require("passport");
 const stripePublishableKey = process.env.STRIPE_P_KEY;
 const stripeSecretKey = process.env.STRIPE_S_KEY;
+<<<<<<< HEAD
+=======
+
+>>>>>>> wiki-collaborators
 
 module.exports = {
     signUp(req, res, next) {
@@ -49,15 +53,15 @@ module.exports = {
         res.render("users/upgrade_downgrade", {stripePublishableKey});
       },
       upgrade(req, res, next) {
-        userQueries.upgrade(req.params.id, (err, user) => {
+        const callback = (err) => {
           if(err) {
             req.flash("error", err);
             res.redirect("/");
           } else {
-            res.render("users/payment_response");
-              res.render("/");
-            }
-          })
+            res.render("users/payment_response")
+          }
+        };
+        userQueries.upgrade(req.params.id, callback);
       },
       downgrade(req, res, next) {
         userQueries.downgrade(req.params.id, (err, user) => {
@@ -72,6 +76,16 @@ module.exports = {
             res.render("/");
           }
         });
+        // var callback = (err) => {
+        //   if(err) {
+        //     req.flash("error", err);
+        //     res.redirect("/");
+        //   } else {
+        //     wikiQueries.privateToPublic(req.params.id);
+        //     res.redirect("/");
+        //   }
+        // };
+        // userQueries.downgrade(req.params.id, callback);
     }
 
 }

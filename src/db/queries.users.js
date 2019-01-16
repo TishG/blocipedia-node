@@ -30,17 +30,36 @@ module.exports = {
       console.log(err);
     })
   },
-  upgrade(id, callback) {
-    return User.findById(id).then((user) => {
-      if(!user) {
-        return callback("User does not exist")
-      } else {
-        return user.updateAttributes({role: "premium"})
+  // upgrade(id, callback) {
+  //   return User.findById(id).then((user) => {
+  //     if(!user) {
+  //       return callback("User does not exist")
+  //     } else {
+  //       return user.updateAttributes({role: "premium"})
+  //     }
+  //   })
+  //   .catch((err) => {
+  //     callback(err);
+  //   })
+  // },
+  upgrade(id, callback) { 
+    return User.findById(id).then((user) => { 
+      if(!user) { 
+        return callback("User does not exist") 
+      } else { 
+        user.updateAttributes({role: "premium"})
+        .then((err, user) => { 
+          if (err) { 
+            return callback(err)
+          } else {
+            return callback(null, user)
+          }
+        })
       }
-    })
-    .catch((err) => {
-      callback(err);
-    })
+    }) 
+    .catch((err) => { 
+      callback(err); 
+    });
   },
   downgrade(id, callback) {
     return User.findById(id).then((user) => {
@@ -52,6 +71,29 @@ module.exports = {
     })
     .catch((err) => {
       callback(err);
+    })
+  },
+
+  getUser(id, callback) {
+    let result = {};
+    User.findById(id)
+    .then((user) => {
+      if(!user) {
+        callback(404);
+      } else {
+        result["user"] = user;
+        Collaborator.scope({
+          method: ["collaborationsFor", id]
+        })
+        .all()
+        .then((collaborations) => {
+          result["collaborations"] = collaborations;
+          callback(null, result);
+        })
+        .catch((err) => {
+          callback(err);
+        })
+      }
     })
   }
 
