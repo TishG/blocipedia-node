@@ -1,15 +1,7 @@
 const path = require("path");
-<<<<<<< HEAD
-
-=======
->>>>>>> wiki-collaborators
 module.exports = {
   config: path.resolve("./src/db/config", "config.json"),
   "models-path": path.resolve("./src/db/models"),
   "seeders-path": path.resolve("./src/db/seeds"),
   "migrations-path": path.resolve("./src/db/migrations")
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> wiki-collaborators
