@@ -3,10 +3,6 @@ const wikiQueries = require("../db/queries.wikis.js");
 const passport = require("passport");
 const stripePublishableKey = process.env.STRIPE_P_KEY;
 const stripeSecretKey = process.env.STRIPE_S_KEY;
-<<<<<<< HEAD
-=======
-
->>>>>>> wiki-collaborators
 
 module.exports = {
     signUp(req, res, next) {

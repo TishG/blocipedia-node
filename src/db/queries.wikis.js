@@ -82,7 +82,6 @@ module.exports = {
           callback(err);
       })
   },
-
       updateWiki(req, updatedWiki, callback){
              return Wiki.findById(req.params.id)
              .then((wiki) => {
