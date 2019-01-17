@@ -9,7 +9,9 @@ module.exports = {
     if(authorized) {
       return Wiki.findAll({   
         include: [{
-          model: Collaborator, as: "collaborators", attributes: ["userId"]
+          model: Collaborator, 
+          as: "collaborators", 
+          attributes: ["userId"]
         }]
       })
       .then((wiki) => {
@@ -42,11 +44,17 @@ module.exports = {
       return Wiki.findById(id, {
               include: [{
                 model: Collaborator,
-                as: "collaborators"
+                as: "collaborators",
+                attributes: ["userId"]
               }]
+              // ,
+              // include: [{
+              //   model: Users, 
+              //   as: "users"
+              // }]
             })
       .then((wiki) => {
-        console.log(wiki);
+        // console.log(wiki);
         callback(null, wiki);
       })
       .catch((err) => {
