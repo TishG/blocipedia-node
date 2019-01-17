@@ -13,6 +13,7 @@ module.exports = {
         }]
       })
       .then((wiki) => {
+        console.log(Collaborator);
         callback(null, wiki);   
       })
       .catch((err) => {
