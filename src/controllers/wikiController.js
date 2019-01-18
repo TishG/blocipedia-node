@@ -3,7 +3,7 @@ const Authorizer = require("../policies/application");
 const markdown = require( "markdown" ).markdown;
 
 module.exports = {
-        index(req, res, next){
+        index(req, res){
           const callback = (err, wikis) => {
             if(err){
               res.redirect(500, "static/index");
@@ -50,7 +50,6 @@ module.exports = {
               } else {
                 wiki.body = markdown.toHTML(wiki.body);
                 wiki.title = markdown.toHTML(wiki.title);
-                console.log(wiki.collaborators);
                 res.render("wikis/show", {wiki});
               }
             });

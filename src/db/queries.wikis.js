@@ -11,11 +11,13 @@ module.exports = {
         include: [{
           model: Collaborator, 
           as: "collaborators", 
-          attributes: ["userId"]
+          include: [{
+            model: User
+          }]
         }]
       })
       .then((wiki) => {
-        console.log(Collaborator);
+        console.log(wiki);
         callback(null, wiki);   
       })
       .catch((err) => {
@@ -26,6 +28,38 @@ module.exports = {
       callback(401);
     }
   },
+  // getAllCollabWikis(req, callback) {
+  //   const authorized = new Authorizer(req.user, Wiki.findAll());
+  //   if(authorized) {
+  //     return Wiki.findAll({  
+  //       include: [{
+  //         model: Collaborator,
+  //         as: "collaborators",
+  //         attributes: ["userId"]
+  //       }]
+  //     }).then((req, wikis) => {
+  //       console.log(wikis);
+  //              return wikis.map((wiki) => {
+  //                if(wiki.private) {
+  //                  for (let i=0;i<wiki.collaborators.length;i++){
+  //                    console.log(wiki.collaborators);
+  //                      if (wiki.collaborators[i].userId == req.user.userId){
+  //                        return wiki;
+  //                    }
+  //                  }
+  //                } else if (wiki.private === false){
+  //                     return wiki;
+  //                }
+  //              })
+  //            })
+  //     .catch((err) => {
+  //       callback(err);
+  //     });
+  //   } else {
+  //     req.flash("notice", "You are not authorized to do that.")
+  //     callback(401);
+  //   }
+  // },
     addWiki(newWiki, callback){
       return Wiki.create({
         title: newWiki.title,

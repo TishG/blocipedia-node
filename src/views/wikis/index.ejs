@@ -11,22 +11,28 @@
 
       <% if(currentUser) { %>
         <a href="/wikis/new" class="btn btn-success mb-1">Create New Wiki</a>
-      <% } %>
-
       <ul class="list-group">
         <% wikis.forEach((wiki) => { %>
-          <!-- <% console.log(wiki.collaborators) %> -->
+          <% console.log(wiki.id) %>
+          <% console.log(wiki.collaborators) %>
           <% if(wiki.private) { %>
-            <% if(currentUser) { %>
-              <% console.log(wiki.collaborators.userId) %>
-                <% if(currentUser.isAdmin() || currentUser.isPremium() || currentUser.Id === wiki.collaborators.userId) { %>
-          <li class="list-group-item mb-1">
+            <!-- <% if(currentUser) { %> -->
+            <% if (currentUser.isAdmin()  || (currentUser.isPremium() && currentUser.id == wiki.userId)) { %>
+            <li class="list-group-item mb-1">
             <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
             <section id="private-badge" class="d-flex justify-content-end">
             <p class="badge badge-danger">Private</p>
           </section>
           </li>
             <% } %>
+            <!-- <% if (currentUser.id === wiki.collaborators.userId) { %>
+              <li class="list-group-item mb-1">
+              <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
+              <section id="private-badge" class="d-flex justify-content-end">
+              <p class="badge badge-danger">Private</p>
+            </section>
+            </li>
+              <% } %> -->
           <% } %>
        <% } else { %>
               <li class="list-group-item mb-1">
@@ -35,6 +41,24 @@
             <% } %>
         <% }) %>
       </ul>
+      <% } %>
+      <% if(!currentUser) { %>
+        <h3 class="text-center mt-5">Please <a href="/users/sign_up">sign up</a> or <a href="/users/sign_in">sign in</a> to view Wikis.</h3>
+        <% } %>
+      <!-- <% if(currentUser) { %>
+        <ul class="list-group">
+        <% wikis.filter((wiki) => { %>
+        <% if(wiki.collaborators.userId == currentUser.Id && wiki.collaborators.wikiId == wikis.Id && wiki.private) { %>
+              <li class="list-group-item mb-1">
+                  <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
+                  <section id="private-badge" class="d-flex justify-content-end">
+                  <p class="badge badge-danger">Private</p>
+                </section>
+                </li>
+        <% } %>
+        <% }) %>
+      </ul>
+      <% } %> -->
     </main>
   </body>
 </html>
