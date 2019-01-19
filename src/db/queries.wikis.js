@@ -2,17 +2,40 @@ const Wiki = require("./models").Wiki;
 const User = require("./models").User;
 const Collaborator =  require("./models").Collaborator;
 const Authorizer = require("../policies/application");
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
 
 module.exports = {
   getAllWikis(req, callback){
+    // console.log(req);
+    // const role = req.user.role;
+    //     let options = {};  // no filter / show all by default
+
+    //     if (role == "standard")        // Standard user
+    //         options = {private: false};
+    //     else if (role == "premium") // Premium user
+    //         options = {
+    //             [Op.or]: [{private: false}, {userId: req.user.id}, { '$collaborators.userId$': req.user.id }]
+    //         };
+    //     else (role == "admin")
+    //         options = {
+    //           [Op.or]: [{private: true}, {private:false}]
+    //         }
     const authorized = new Authorizer(req.user, Wiki.findAll());
     if(authorized) {
-      return Wiki.findAll({   
-        include: [{
+      return Wiki.findAll({ 
+        // where: options,  
+        where: {
+          [Op.or] : [{userId: req.user.id}, {'$collaborators.userId$': req.user.id}, {private: false}, {private: true}]
+        }, 
+        include: [
+          {
           model: Collaborator, 
-          as: "collaborators", 
+          as: "collaborators",
+          attributes: ['userId'],
           include: [{
-            model: User
+            model: User,
+            attributes: ['id']
           }]
         }]
       })
