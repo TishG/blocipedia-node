@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
   <head>
     <% include ../static/partials/head.ejs %>
@@ -7,25 +7,25 @@
     <% include ../static/partials/navbar.ejs %>
     <main class="container mb-2">
         <% include ../static/partials/messages.ejs %>
-      <h1 class="text-info text-center mt-2">Wikis</h1>
+      <h1 class="text-info text-center mt-2">Wikis</h1> -->
 
-      <% if(currentUser) { %>
-        <a href="/wikis/new" class="btn btn-success mb-1">Create New Wiki</a>
+      <!-- <% if(currentUser) { %> -->
+        <!-- <a href="/wikis/new" class="btn btn-success mb-1">Create New Wiki</a>
       <ul class="list-group">
-        <% wikis.forEach((wiki) => { %>
-          <% if(wiki.private) { %>
-            <% console.log(wiki.collaborators) %>
+        <% wikis.forEach((wiki) => { %> -->
+          <!-- <% if(wiki.private) { %> -->
+            <!-- <% console.log(wiki.collaborators) %>
             <% console.log(wiki.collaborators.userId)%>
-            <% console.log(currentUser.id )%>
+            <% console.log(currentUser.id )%> -->
             <!-- <% if(currentUser) { %> -->
-            <% if (currentUser.isAdmin()  || (currentUser.isPremium() && currentUser.id == wiki.userId) || wiki.collaborators.userId == currentUser.id) { %>
-            <li class="list-group-item mb-1">
+            <!-- <% if (currentUser.isAdmin()  || (currentUser.isPremium() && currentUser.id == wiki.userId) || wiki.collaborators.userId == currentUser.id) { %> -->
+            <!-- <li class="list-group-item mb-1">
             <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
             <section id="private-badge" class="d-flex justify-content-end">
             <p class="badge badge-danger">Private</p>
           </section>
-          </li>
-            <% } %>
+          </li> -->
+            <!-- <% } %> -->
             <!-- <% if (currentUser.id === wiki.collaborators.userId) { %>
               <li class="list-group-item mb-1">
               <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
@@ -34,15 +34,17 @@
             </section>
             </li>
               <% } %> -->
-          <% } %>
-       <% } else { %>
-              <li class="list-group-item mb-1">
+          <!-- <% } %>
+       <% } else { %> -->
+              <!-- <li class="list-group-item mb-1">
                 <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
-              </li>
-            <% } %>
-        <% }) %>
-      </ul>
-      <% } %>
+              </li> -->
+            <!-- <% } %>
+        <% }) %> -->
+
+      <!-- </ul>
+      <% } %> -->
+
       <!-- <% if(!currentUser) { %>
         <h3 class="text-center mt-5">Please <a href="/users/sign_up">sign up</a> or <a href="/users/sign_in">sign in</a> to view Wikis.</h3>
         <% } %> -->
@@ -60,6 +62,33 @@
         <% }) %>
       </ul>
       <% } %> -->
-    </main>
+
+    <!-- </main>
   </body>
-</html>
+</html> -->
+<DOCTYPE html>
+  <html>
+    <head>
+      <% include ../static/partials/head.ejs %>
+    </head>
+    <body>
+      <% include ../static/partials/navbar.ejs %>
+      <main class="container mb-2">
+          <% include ../static/partials/messages.ejs %>
+        <h1 class="text-info text-center mt-2">Wikis</h1>
+          <a href="/wikis/new" class="btn btn-success mb-1">Create New Wiki</a>
+        <ul class="list-group">
+          <% wikis.forEach((wiki) => { %>
+              <li class="list-group-item mb-1">
+              <a href="/wikis/<%= wiki.id %>"> <%= wiki.title %> </a>
+              <section id="private-badge" class="d-flex justify-content-end">
+                <% if(wiki.private) { %>
+              <p class="badge badge-danger">Private</p>
+                <% } %>
+            </section>
+            </li>
+        </ul>
+        <% }) %>
+      </main>
+    </body>
+  </html>
