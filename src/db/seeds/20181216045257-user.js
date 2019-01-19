@@ -4,9 +4,9 @@ const faker = require("faker");
 
  let users = [];
 
- for(let i = 1 ; i <= 5 ; i++){
+ for(let i = 1 ; i <= 10; i++){
    users.push({
-     id: faker.random.number(),
+     id: i,
      email: faker.internet.email(),
      password: faker.internet.password(),
      role: "standard",

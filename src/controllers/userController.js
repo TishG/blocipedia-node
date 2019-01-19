@@ -59,19 +59,20 @@ module.exports = {
         };
         userQueries.upgrade(req.params.id, callback);
       },
-      downgrade(req, res, next) {
-        userQueries.downgrade(req.params.id, (err, user) => {
-          if (err) {
-            console.log(err);
-            req.flash("error", err); 
-            res.redirect("/"); 
-          } else {
-            wikiQueries.privateToPublic(req.params.id);
-            // req.flash("notice", "We're sorry to see you leave premium, your premium membership has been cancelled.");
-            // res.redirect("/");
-            res.render("/");
-          }
-        });
+      // downgrade(req, res, next) {
+      //   userQueries.downgrade(req.params.id, (err, user) => {
+      //     if (err) {
+      //       console.log(err);
+      //       req.flash("error", err); 
+      //       res.redirect("/"); 
+      //     } else {
+      //       wikiQueries.privateToPublic(req.params.id);
+      //       // req.flash("notice", "We're sorry to see you leave premium, your premium membership has been cancelled.");
+      //       // res.redirect("/");
+      //       res.render("/");
+      //     }
+      //   });
+
         // var callback = (err) => {
         //   if(err) {
         //     req.flash("error", err);
@@ -82,6 +83,18 @@ module.exports = {
         //   }
         // };
         // userQueries.downgrade(req.params.id, callback);
+    //}
+    downgrade(req, res, next) {
+      const callback = (err) => {
+        if(err) {
+            console.log(err);
+            req.flash("error", err); 
+            res.redirect("/"); 
+        } else {
+            res.redirect("/");
+            wikiQueries.privateToPublic(req.params.id);
+        }
+      };
+      userQueries.downgrade(req.params.id, callback);
     }
-
 }
