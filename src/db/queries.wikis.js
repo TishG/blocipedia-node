@@ -25,25 +25,24 @@ module.exports = {
     if(authorized) {
       return Wiki.findAll({ 
         // where: options,  
-        where: {
-          [Op.or] : [{userId: req.user.id}, {'$collaborators.userId$': req.user.id}, {private: false}, {private: true}]
-        }, 
-        include: [
-          {
+        // where: {
+        //   [Op.or] : [{userId: req.user.id}, {'$collaborators.userId$': req.user.id}, {private: false}, {private: true}]
+        // }, 
+        include: [{
           model: Collaborator, 
           as: "collaborators",
           attributes: ['userId'],
-          include: [{
-            model: User,
-            attributes: ['id']
-          }]
-        }]
-      })
+          }],
+          where: {
+            [Op.or] : [{userId: req.user.id}, {'$collaborators.userId$': req.user.id}, {private: false}, {private: true}]
+          }
+        })
       .then((wiki) => {
         console.log(wiki);
         callback(null, wiki);   
       })
       .catch((err) => {
+        console.log(err);
         callback(err);
       });
     } else {
