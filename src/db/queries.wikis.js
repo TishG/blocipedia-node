@@ -31,7 +31,7 @@ module.exports = {
         include: [{
           model: Collaborator, 
           as: "collaborators",
-          attributes: ['userId', 'id']
+          // attributes: ['userId', 'id']
           // attributes: ['userId'],
           }],
           where: {

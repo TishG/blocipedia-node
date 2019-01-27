@@ -5,6 +5,5 @@ const collaboratorController = require("../controllers/collaboratorController");
 
 router.post("/wikis/:wikiId/collaborators/add", collaboratorController.add);
 router.post("/wikis/:wikiId/collaborators/:collaboratorId/remove", collaboratorController.remove);
-// router.post("/wikis/:wikiId/collaborators/remove", collaboratorController.remove);
 
 module.exports = router;
