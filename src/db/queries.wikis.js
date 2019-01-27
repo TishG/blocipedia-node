@@ -34,7 +34,8 @@ module.exports = {
           attributes: ['userId'],
           }],
           where: {
-            [Op.or] : [{userId: req.user.id}, {'$collaborators.userId$': req.user.id}, {private: false}, {private: true}]
+            // [Op.or] : [{userId: req.user.id}, {'$collaborators.userId$': req.user.id}, {private: false}, {private: true}]
+            [Op.or] : [{userId: req.user.id}, {'$collaborators.userId$': req.user.id}, {private: false}]
           }
         })
       .then((wiki) => {

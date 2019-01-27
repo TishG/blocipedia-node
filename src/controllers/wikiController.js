@@ -55,6 +55,7 @@ module.exports = {
             });
           },
           destroy(req, res, next){
+            console.log(`userId: ${req.params.id}`);
             let id = req.params.id;
             wikiQueries.deleteWiki(id, (err, wiki) => {
                   if(err){

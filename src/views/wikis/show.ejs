@@ -45,7 +45,8 @@
     <% wiki.collaborators.forEach((collaborator) => { %>
     <li class="list-group-item">
         <%= collaborator.userId %>
-        <form style="display:initial" action="/wikis/<%= wiki.id %>/collaborators/<%= collaborator.id %>/remove"
+        <form style="display:initial" 
+        action="/wikis/<%= wiki.id %>/collaborators/<%= collaborator.id %>/remove"
             method="post">
             <button type="submit" class="btn btn-danger">Remove</button>
         </form>
