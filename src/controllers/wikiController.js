@@ -48,6 +48,7 @@ module.exports = {
               if(err || wiki == null){
                 res.redirect(404, "/");
               } else {
+                console.log("COLLABORATOR:", wiki.collaborators[0]);
                 wiki.body = markdown.toHTML(wiki.body);
                 wiki.title = markdown.toHTML(wiki.title);
                 res.render("wikis/show", {wiki});
@@ -55,7 +56,7 @@ module.exports = {
             });
           },
           destroy(req, res, next){
-            console.log(`userId: ${req.params.id}`);
+           
             let id = req.params.id;
             wikiQueries.deleteWiki(id, (err, wiki) => {
                   if(err){

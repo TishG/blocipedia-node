@@ -31,7 +31,8 @@ module.exports = {
         include: [{
           model: Collaborator, 
           as: "collaborators",
-          attributes: ['userId'],
+          attributes: ['userId', 'id']
+          // attributes: ['userId'],
           }],
           where: {
             // [Op.or] : [{userId: req.user.id}, {'$collaborators.userId$': req.user.id}, {private: false}, {private: true}]
