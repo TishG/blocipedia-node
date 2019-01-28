@@ -48,7 +48,7 @@ module.exports = {
               if(err || wiki == null){
                 res.redirect(404, "/");
               } else {
-                console.log("COLLABORATOR:", wiki.collaborators[0]);
+                // console.log("COLLABORATOR:", wiki.collaborators[0]);
                 wiki.body = markdown.toHTML(wiki.body);
                 wiki.title = markdown.toHTML(wiki.title);
                 res.render("wikis/show", {wiki});
