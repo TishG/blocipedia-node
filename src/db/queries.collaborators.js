@@ -47,18 +47,23 @@ module.exports = {
             })                   
         },
         
-        removeCollaborator(req, wiki, callback) {
-            // let collabId = req.body.collaborator;
-            const authorized = new Authorizer(req.user, wiki, collabId).destroy();
+        removeCollaborator(req, callback) {
+            console.log(req.params);
+            console.log(req.body);
+            let collabId = req.body.collaborator;
+            let wikiId = req.params.wikiId;
+            const authorized = new Authorizer(req.user, wikiId, collabId).destroy();
             // const authorized = new Authorizer(req.user, wiki).destroy();
             if(authorized) {
                 Collaborator.destroy({
                     where: {
+                        collabId: collabId,
+                        wikiId: wikiId
                         // userId: req.user.id,
                         // userId: collabId,
                         // wikiId: req.params.wikiId
                         // wikiId: req.wiki.id
-                        id: req.params.collaboratorId
+                        // id: req.params.collaboratorId
                     }
                 })
                 .then((deletedRecordsCount) => {
