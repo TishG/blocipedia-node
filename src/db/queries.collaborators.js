@@ -48,22 +48,20 @@ module.exports = {
         },
         
         removeCollaborator(req, callback) {
-            console.log(req.params);
-            console.log(req.body);
-            let collabId = req.body.collaborator;
+            // console.log(req.params);
+            // console.log(req.body);
+            // let collabId = req.body.collaborator;
+            let userId = req.params.userId;
             let wikiId = req.params.wikiId;
-            const authorized = new Authorizer(req.user, wikiId, collabId).destroy();
-            // const authorized = new Authorizer(req.user, wiki).destroy();
+            let id = req.params.id;
+            // const authorized = new Authorizer(req.user, wikiId, collabId).destroy();
+            const authorized = new Authorizer(wikiId, userId, id).destroy();
             if(authorized) {
                 Collaborator.destroy({
                     where: {
-                        collabId: collabId,
-                        wikiId: wikiId
-                        // userId: req.user.id,
-                        // userId: collabId,
-                        // wikiId: req.params.wikiId
-                        // wikiId: req.wiki.id
-                        // id: req.params.collaboratorId
+                        userId: userId,
+                        wikiId: wikiId,
+                        id: id
                     }
                 })
                 .then((deletedRecordsCount) => {
