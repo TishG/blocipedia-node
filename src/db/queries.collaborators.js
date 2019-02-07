@@ -48,21 +48,8 @@ module.exports = {
         },
         
         removeCollaborator(req, callback) {
-            // console.log(req.params);
-            // console.log(req.body);
-            // let collabId = req.body.collaborator;
-            let userId = req.params.userId;
-            let wikiId = req.params.wikiId;
-            let id = req.params.id;
-            // const authorized = new Authorizer(req.user, wikiId, collabId).destroy();
-            const authorized = new Authorizer(wikiId, userId, id).destroy();
-            if(authorized) {
                 Collaborator.destroy({
-                    where: {
-                        userId: userId,
-                        wikiId: wikiId,
-                        id: id
-                    }
+                    where: req.params.id
                 })
                 .then((deletedRecordsCount) => {
                     callback(null, deletedRecordsCount);
@@ -70,10 +57,5 @@ module.exports = {
                 .catch((err) => {
                     console.log(err);
                 })
-            } else {
-                req.flash('notice', 'You are not authorized to do that.');
-                callback(401);
             }
-        }
-        
 }

@@ -18,6 +18,9 @@ module.exports = {
     },
     remove(req, res, next) {
         if(req.user) {
+            // const authorized = new Authorizer(req.user, wikiId, collabId).destroy();
+            const authorized = new Authorizer( req.params.id).destroy();
+            if(authorized) {
             collaboratorQueries.removeCollaborator(req, (err, collaborator) => {
                 if(err) {
                     req.flash('error', err);
@@ -27,7 +30,7 @@ module.exports = {
         } else {
             req.flash('notice', 'You must be signed in to do that.');
             res.redirect(req.headers.referer);
+            }
         }
     }
-
 }
