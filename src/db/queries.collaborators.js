@@ -49,7 +49,9 @@ module.exports = {
         
         removeCollaborator(req, callback) {
                 Collaborator.destroy({
-                    where: req.params.id
+                    where: {
+                       userId: req.params.userId
+                    }
                 })
                 .then((deletedRecordsCount) => {
                     callback(null, deletedRecordsCount);

@@ -19,7 +19,7 @@ module.exports = {
     remove(req, res, next) {
         if(req.user) {
             // const authorized = new Authorizer(req.user, wikiId, collabId).destroy();
-            const authorized = new Authorizer( req.params.id).destroy();
+            const authorized = new Authorizer( userId ).destroy();
             if(authorized) {
             collaboratorQueries.removeCollaborator(req, (err, collaborator) => {
                 if(err) {
