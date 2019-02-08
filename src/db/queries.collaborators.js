@@ -55,6 +55,7 @@ module.exports = {
                 })
                 .then((deletedRecordsCount) => {
                     callback(null, deletedRecordsCount);
+                    console.log(deletedRecordsCount);
                 })
                 .catch((err) => {
                     console.log(err);
