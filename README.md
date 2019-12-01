@@ -33,10 +33,11 @@ Built using Node, ejs, express, css, and bootstrap.
 
 ## View
 
-1) "git clone (url)"
-2) "npm install"
-3) "npm start"
-4) [production website](https://tishg-blocipedia-node.herokuapp.com/users/upgrade)
+1) git clone (url)
+2) cd (project directory)
+3) npm install
+4) npm start
+5) [production website](https://tishg-blocipedia-node.herokuapp.com/users/upgrade)
 
 ### Issues
 Stripe does not currently work on production website.
